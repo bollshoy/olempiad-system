@@ -29,24 +29,25 @@ const Navbar = () => {
 				<li>
 					<NavLink to="/" className="header__link">Головна</NavLink>
 				</li>
-				{/* Если пользователь авторизован, показываем "Профиль", иначе показываем кнопки "Реєстрація" и "Авторизація" */}
-				{user ? (
-						<li>
-							<NavLink to="/profile" className="header__link">Профіль</NavLink>
-						</li>
-				) : (
-						<>
-							<li>
-								<NavLink to="/register" className="header__link">Реєстрація</NavLink>
-							</li>
-							<li>
-								<NavLink to="/login" className="header__link">Авторизація</NavLink>
-							</li>
-						</>
-				)}
 				<li>
 					<NavLink to="/olympiads" className="header__link">Олімпіади</NavLink>
 				</li>
+
+				{/* Если пользователь авторизован, показываем "Профиль", иначе показываем кнопки "Реєстрація" и "Авторизація" */}
+				{user ? (
+					<li>
+						<NavLink to="/profile" className="header__link">Профіль</NavLink>
+					</li>
+				) : (
+					<>
+						<li>
+							<NavLink to="/register" className="header__link">Реєстрація</NavLink>
+						</li>
+						<li>
+							<NavLink to="/login" className="header__link">Авторизація</NavLink>
+						</li>
+					</>
+				)}
 				<li>
 					<NavLink to="/contact" className="header__link">Контакты</NavLink>
 				</li>
