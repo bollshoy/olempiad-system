@@ -10,8 +10,8 @@ import './_Profile.scss'
 const Profile = () => {
   const navigate = useNavigate()
   const [userDetails, setUserDetails] = useState(null)
-  const [img, setImg] = useState(null)
-  const [imgUrl, setImgUrl] = useState([])
+  // const [img, setImg] = useState(null)
+  // const [imgUrl, setImgUrl] = useState([])
 
   const fetchUserData = async () => {
     auth.onAuthStateChanged(async (user) => {

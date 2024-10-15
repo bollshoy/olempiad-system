@@ -9,7 +9,6 @@ const Hero = () => {
 	
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async (user) => {
-			console.log('Auth:', user)
 			setUser(user)
 		})
 		

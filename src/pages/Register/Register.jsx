@@ -22,11 +22,8 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault()
-    console.log('Email:', email)
-    console.log('Password:', password)
 
     if (email === '' || password.length < 6) {
-      console.log('Please enter a valid email and password (at least 6 characters).')
       return
     }
 
