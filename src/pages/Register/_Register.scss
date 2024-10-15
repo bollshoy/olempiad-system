@@ -1,6 +1,39 @@
 .register {
   margin-top: 150px;
 
+  &__dialog {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 42%;
+    top: 65%;
+
+    .dialog__text {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 28px;
+      margin-bottom: 20px;
+    }
+
+    .dialog__btn {
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 22px;
+      padding: 10px 28px;
+      border: 1px solid var(--black);
+      border-radius: 10px;
+      transition: .3s ease;
+
+      &:hover {
+        background: var(--black);
+        color: var(--white);
+        transition: .3s ease;
+      }
+    }
+  }
+
   .register__link {
     font-weight: 500;
     font-size: 19px;
