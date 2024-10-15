@@ -13,28 +13,28 @@ const Profile = () => {
   // const [img, setImg] = useState(null)
   // const [imgUrl, setImgUrl] = useState([])
 
-  const fetchUserData = async () => {
-    auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        console.log(user)
-        const docRef = doc(db, 'User', user.uid)
-        const docSnap = await getDoc(docRef)
-        if (docSnap.exists()) {
-          setUserDetails(docSnap.data())
-          console.log(docSnap.data())
-        } else {
-          console.log('No user data found')
-        }
+  const fetchUserData = async (user) => {
+    if (user) {
+      const docRef = doc(db, 'User', user.uid);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setUserDetails(docSnap.data());
       } else {
-        console.log('User is not logged in')
-        navigate('/login')
+        console.log('No user data found');
       }
-    })
-  }
+    } else {
+      console.log('User is not logged in');
+      navigate('/login');
+    }
+  };
 
   useEffect(() => {
-    fetchUserData()
-  }, [])
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      fetchUserData(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
 
   const handleLogout = async () => {
     try {
