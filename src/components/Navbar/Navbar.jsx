@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import './_Navbar.scss';
-import { auth } from '../../../firebase.js';
+import {auth} from '../../../firebase.js';
 
 const Navbar = () => {
 	const [open, setOpen] = useState(false);
@@ -29,25 +29,24 @@ const Navbar = () => {
 				<li>
 					<NavLink to="/" className="header__link">Головна</NavLink>
 				</li>
+				{/* Если пользователь авторизован, показываем "Профиль", иначе показываем кнопки "Реєстрація" и "Авторизація" */}
+				{user ? (
+						<li>
+							<NavLink to="/profile" className="header__link">Профіль</NavLink>
+						</li>
+				) : (
+						<>
+							<li>
+								<NavLink to="/register" className="header__link">Реєстрація</NavLink>
+							</li>
+							<li>
+								<NavLink to="/login" className="header__link">Авторизація</NavLink>
+							</li>
+						</>
+				)}
 				<li>
 					<NavLink to="/olympiads" className="header__link">Олімпіади</NavLink>
 				</li>
-				
-				{/* Если пользователь авторизован, показываем "Профиль", иначе показываем кнопки "Реєстрація" и "Авторизація" */}
-				{user ? (
-					<li>
-						<NavLink to="/profile" className="header__link">Профіль</NavLink>
-					</li>
-				) : (
-					<>
-						<li>
-							<NavLink to="/register" className="header__link">Реєстрація</NavLink>
-						</li>
-						<li>
-							<NavLink to="/login" className="header__link">Авторизація</NavLink>
-						</li>
-					</>
-				)}
 				<li>
 					<NavLink to="/contact" className="header__link">Контакты</NavLink>
 				</li>

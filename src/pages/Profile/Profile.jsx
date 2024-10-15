@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {auth, db, storage} from '../../../firebase.js'
+import {auth, db} from '../../../firebase.js'
 import {doc, getDoc} from 'firebase/firestore'
 import {toast} from 'react-toastify'
-import {getDownloadURL, listAll, ref, uploadBytes} from 'firebase/storage'
-import {v4} from 'uuid'
 import Header from '../../components/Header/Header.jsx'
 import backArrow from '../../assets/icons/backArrow.svg'
 import './_Profile.scss'
@@ -49,38 +47,41 @@ const Profile = () => {
     }
   }
 
-  const handleClick = () => {
-    if (!img) {
-      toast.error('No file selected')
-      return
-    }
-
-    const imgRef = ref(storage, `files/${v4()}`)
-    uploadBytes(imgRef, img)
-        .then(() => {
-          toast.success('File uploaded successfully')
-        })
-        .catch((error) => {
-          toast.error('Error uploading file: ' + error.message)
-        })
-  }
-
-  useEffect(() => {
-    const fetchImages = async () => {
-      const listRef = ref(storage, 'files')
-      const imgs = await listAll(listRef)
-
-      const urls = await Promise.all(
-          imgs.items.map(async (item) => {
-            const url = await getDownloadURL(item)
-            return url
-          })
-      )
-      setImgUrl(urls)
-    }
-
-    fetchImages()
-  }, [])
+  // const handleClick = () => {
+  //   if (!img) {
+  //     toast.error('No file selected');
+  //     return;
+  //   }
+  //
+  //   const imgRef = ref(storage, `files/${v4()}`);
+  //   uploadBytes(imgRef, img)
+  //       .then(() => {
+  //         toast.success('File uploaded successfully');
+  //         setImg(null); // Сбросить выбранное изображение после загрузки
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error uploading file:', error); // Вывод ошибки в консоль
+  //         toast.error('Error uploading file: ' + error.message);
+  //       });
+  // }
+  //
+  //
+  // useEffect(() => {
+  //   const fetchImages = async () => {
+  //     const listRef = ref(storage, 'files')
+  //     const imgs = await listAll(listRef)
+  //
+  //     const urls = await Promise.all(
+  //         imgs.items.map(async (item) => {
+  //           const url = await getDownloadURL(item)
+  //           return url
+  //         })
+  //     )
+  //     setImgUrl(urls)
+  //   }
+  //
+  //   fetchImages()
+  // }, [])
 
   return (
       <>
@@ -91,32 +92,32 @@ const Profile = () => {
                 <>
                   <div className="profile__left">
                     {/* Фотография */}
-                    <div className="profile__img-wrapper">
-                      {imgUrl.length > 0 ? (
-                          <img
-                              src={imgUrl[0]}
-                              alt="Profile"
-                              className="profile__img"
-                              onClick={() => document.getElementById('imgInput').click()}
-                          />
-                      ) : (
-                          <div
-                              className="profile__img-placeholder"
-                              onClick={() => document.getElementById('imgInput').click()}
-                          >
-                            Click to upload
-                          </div>
-                      )}
-                      <input
-                          id="imgInput"
-                          type="file"
-                          style={{display: 'none'}}
-                          onChange={(e) => setImg(e.target.files[0])}
-                      />
-                    </div>
-                    <button className="profile__upload" onClick={handleClick}>
-                      Upload
-                    </button>
+                    {/*<div className="profile__img-wrapper">*/}
+                    {/*  {imgUrl.length > 0 ? (*/}
+                    {/*      <img*/}
+                    {/*          src={imgUrl[0]}*/}
+                    {/*          alt="Profile"*/}
+                    {/*          className="profile__img"*/}
+                    {/*          onClick={() => document.getElementById('imgInput').click()}*/}
+                    {/*      />*/}
+                    {/*  ) : (*/}
+                    {/*      <div*/}
+                    {/*          className="profile__img-placeholder"*/}
+                    {/*          onClick={() => document.getElementById('imgInput').click()}*/}
+                    {/*      >*/}
+                    {/*        Click to upload*/}
+                    {/*      </div>*/}
+                    {/*  )}*/}
+                    {/*  <input*/}
+                    {/*      id="imgInput"*/}
+                    {/*      type="file"*/}
+                    {/*      style={{display: 'none'}}*/}
+                    {/*      onChange={(e) => setImg(e.target.files[0])}*/}
+                    {/*  />*/}
+                    {/*</div>*/}
+                    {/*<button className="profile__upload" onClick={handleClick}>*/}
+                    {/*  Upload*/}
+                    {/*</button>*/}
                   </div>
                   <div className="profile__right">
                     <h3
@@ -125,9 +126,9 @@ const Profile = () => {
                     <p
                         className="profile__item">Прізвище: {userDetails.firstName}</p>
                     <p className="profile__item">Ім'я: {userDetails.lastName}</p>
-                    <div className="profile__btn">
+                    <div className="profile__btn"  onClick={handleLogout}>
                       <img src={backArrow} alt="backArrow" className="profile__btn-img"/>
-                      <button onClick={handleLogout}>Вийти</button>
+                      <button>Вийти</button>
                     </div>
                   </div>
                 </>
