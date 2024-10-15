@@ -30,7 +30,7 @@ const Navbar = () => {
 					<NavLink to="/" className="header__link">Головна</NavLink>
 				</li>
 				<li>
-					<NavLink to="/olympiads" className="header__link">Олімпіади</NavLink>
+					<NavLink to="/profile" className="header__link">Олімпіади</NavLink>
 				</li>
 
 				{/* Если пользователь авторизован, показываем "Профиль", иначе показываем кнопки "Реєстрація" и "Авторизація" */}
