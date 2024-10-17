@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import {auth} from '../../../firebase.js';
+import {auth, db} from '../../../firebase.js';
 import {toast} from 'react-toastify';
 import Header from '../../components/Header/Header.jsx';
 import backArrow from '../../assets/icons/backArrow.svg';
@@ -13,8 +13,8 @@ const Profile = () => {
   const fetchUserData = async (user) => {
     try {
       if (user) {
-
-        const docRef = doc(db, 'User', user.uid);
+        console.log(db)
+        // const docRef = doc(db, 'User', user.uid);
         // const docSnap = await getDoc(docRef);
 
         if (false) {
