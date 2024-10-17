@@ -15,10 +15,10 @@ const Profile = () => {
       if (user) {
 
         const docRef = doc(db, 'User', user.uid);
-        const docSnap = await getDoc(docRef);
+        // const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-          setUserDetails(docSnap.data());
+          // setUserDetails(docSnap.data());
         } else {
           console.log('No user data found');
           toast.error('No user data found');
