@@ -29,10 +29,10 @@ const Profile = () => {
         navigate('/login');
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      toast.error('Error fetching user data: ' + error.message);
+      console.error(error);
     }
   };
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

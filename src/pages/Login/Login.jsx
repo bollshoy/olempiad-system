@@ -16,7 +16,6 @@ const Login = () => {
 			await signInWithEmailAndPassword(auth, email, password)
 			console.log('User logged in successfully')
 			navigate('/profile')
-			//react-toastify
 		} catch (error) {
 			console.error('Login error:', error)
 		}
