@@ -3,6 +3,8 @@ import {createUserWithEmailAndPassword} from 'firebase/auth'
 import {NavLink} from 'react-router-dom'
 import {auth, db} from '../../../firebase.js'
 import {doc, setDoc} from 'firebase/firestore'
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import './_Register.scss'
 
 const Register = () => {
@@ -24,6 +26,7 @@ const Register = () => {
     e.preventDefault()
 
     if (email === '' || password.length < 6) {
+      toast.error('Email cannot be empty and password must be at least 6 characters')
       return
     }
 
@@ -35,14 +38,15 @@ const Register = () => {
           email: user.email,
           firstName: fname,
           lastName: lname,
-        });
-        openModel();
+        })
+        openModel()
+        toast.success('Registration successful!')
       }
     } catch (error) {
       console.log(error.message)
+      toast.error('Registration failed: ' + error.message)
     }
   }
-
 
   return (
       <div className="register">
@@ -54,7 +58,6 @@ const Register = () => {
               <input
                   className={'form__input'}
                   type="email"
-                  name={email}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
               />
@@ -77,7 +80,7 @@ const Register = () => {
               />
             </div>
             <div className="fname__form form__item">
-              <label htmlFor="lname">Ім'я</label>
+              <label htmlFor="fname">Ім'я</label>
               <input
                   type="text"
                   className={'form__input'}
