@@ -17,7 +17,7 @@ const Profile = () => {
         const docRef = doc(db, 'User', user.uid);
         // const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
+        if (false) {
           // setUserDetails(docSnap.data());
         } else {
           console.log('No user data found');
