@@ -5,8 +5,9 @@ const Olympiads = () => {
 	return (
 		<>
 			<Header/>
-			
-			SOON...
+			<div style={{display: 'flex', justifyContent: 'center', marginTop: '100px', fontWeight: 'medium', fontSize:'32px'}}>
+				У розробці...
+			</div>
 		</>
 	)
 }
