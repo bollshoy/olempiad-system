@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {auth, db} from '../../../firebase.js';
+import {doc, getDoc} from 'firebase/firestore';
 import {toast} from 'react-toastify';
 import Header from '../../components/Header/Header.jsx';
 import backArrow from '../../assets/icons/backArrow.svg';
@@ -13,12 +14,11 @@ const Profile = () => {
   const fetchUserData = async (user) => {
     try {
       if (user) {
-        console.log(db)
-        // const docRef = doc(db, 'User', user.uid);
-        // const docSnap = await getDoc(docRef);
+        const docRef = doc(db, 'User', user.uid);
+        const docSnap = await getDoc(docRef);
 
-        if (false) {
-          // setUserDetails(docSnap.data());
+        if (docSnap.exists()) {
+          setUserDetails(docSnap.data());
         } else {
           console.log('No user data found');
           toast.error('No user data found');
@@ -29,7 +29,7 @@ const Profile = () => {
         navigate('/login');
       }
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.error(error);
     }
   };
 
