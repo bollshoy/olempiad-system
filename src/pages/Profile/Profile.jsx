@@ -13,7 +13,8 @@ const Profile = () => {
   const fetchUserData = async (user) => {
     try {
       if (user) {
-        // const docRef = doc(db, 'User', user.uid);
+
+        const docRef = doc(db, 'User', user.uid);
         // const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
