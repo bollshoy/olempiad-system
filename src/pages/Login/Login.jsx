@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {NavLink, useNavigate} from 'react-router-dom'
-import {auth} from '../../../firebase.js'
 import {signInWithEmailAndPassword} from 'firebase/auth'
+import 'react-toastify/dist/ReactToastify.css';
+import {auth} from '../../../firebase.js'
 import './_Login.scss'
 
 const Login = () => {
@@ -15,6 +16,7 @@ const Login = () => {
 			await signInWithEmailAndPassword(auth, email, password)
 			console.log('User logged in successfully')
 			navigate('/profile')
+			//react-toastify
 		} catch (error) {
 			console.error('Login error:', error)
 		}
